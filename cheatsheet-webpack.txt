@@ -1,0 +1,222 @@
+--- INITIAL CONFIGURATION ---
+
+- Create folder and src directory
+- Create package json file in the main directory
+	npm init -y
+- Install web pack with 2 packages
+	npm install --save-dev webpack webpack-cli
+- Create index.js which will serve as the entry point
+- Create webpack.config.js file
+	// webpack.config.js
+	const path = require("path");
+
+	module.exports = {
+	  mode: "development",
+	  entry: "./src/index.js",
+	  output: {
+	    filename: "main.js",
+	    path: path.resolve(__dirname, "dist"),
+	    clean: true,
+	  },
+	};
+
+- Run webpack for the first time
+	npx webpack
+
+
+--- HANDLE HTML ---
+- Install the html plugin
+	npm install --save-dev html-webpack-plugin
+- Create a template.html in the src folder and fill it with boilerplate
+- Update webpack.config.js
+	
+	// webpack.config.js
+	const path = require("path");
+	const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+	module.exports = {
+	  mode: "development",
+	  entry: "./src/index.js",
+	  output: {
+	    filename: "main.js",
+	    path: path.resolve(__dirname, "dist"),
+	    clean: true,
+	  },
+	  plugins: [
+	    new HtmlWebpackPlugin({
+	      template: "./src/template.html",
+	    }),
+	  ],
+	};
+
+
+--- HANDLE CSS ---
+- Install CSS package loaders
+	npm install --save-dev style-loader css-loader
+- Add these new loaders to webpack.config.js (always remember to put css-loader at the end)
+	// webpack.config.js
+	const path = require("path");
+	const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+	module.exports = {
+	  mode: "development",
+	  entry: "./src/index.js",
+	  output: {
+	    filename: "main.js",
+	    path: path.resolve(__dirname, "dist"),
+	    clean: true,
+	  },
+	  plugins: [
+	    new HtmlWebpackPlugin({
+	      template: "./src/template.html",
+	    }),
+	  ],
+	  module: {
+	    rules: [
+	      {
+		test: /\.css$/i,
+		use: ["style-loader", "css-loader"],
+	      },
+	    ],
+	  },
+	};
+
+- Create a .css file in /src
+- import the newly created .css file into the ./src/index.js file
+	import "./styles.css";
+	
+- Bundle everything again
+	npx webpack
+
+
+--- LOAD IMAGES ---
+
+- Install the loader to handle images
+	npm install --save-dev html-loader
+- Update the modules.rules array in the webpack.config.js file
+	{
+	  test: /\.html$/i,
+	  loader: "html-loader",
+	}
+- Tell the webpack.config.js file in the rules section to read different types of images
+	{
+	  test: /\.(png|svg|jpg|jpeg|gif)$/i,
+	  type: "asset/resource",
+	}
+- To use an image just import it in the js file
+	import odinImage from "./odin.png";
+	   
+	const image = document.createElement("img");
+	image.src = odinImage;
+	   
+	document.body.appendChild(image);
+
+	
+--- SET UP WEB SERVER ---
+- Install the local server
+	npm install --save-dev webpack-dev-server
+- Update the configuration object of webpack.config.js
+	  devtool: "eval-source-map",
+	  devServer: {
+	    watchFiles: ["./src/template.html"],
+	  },
+
+- Run the command an go to http://localhost:8080/
+	npx webpack serve
+	
+
+--- FINAL WEBPACK.CONFIG.JS ---
+// webpack.config.js
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+module.exports = {
+  mode: "development",
+  entry: "./src/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
+    clean: true,
+  },
+  devtool: "eval-source-map",
+  devServer: {
+    watchFiles: ["./src/template.html"],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/template.html",
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+    ],
+  },
+};
+
+--- SPLIT CONFIGURATION FILES (WEBPACK MODES) ---
+https://webpack.js.org/guides/production/
+
+- Create 3 files
+	- webpack.common.js
+	- webpack.dev.js
+	- webpack.prod.js
+	
+- webpack.common.js
+We now have setup our entry and output configuration and we've included any plugins that are required for both environments.
+	// webpack.config.js
+	const path = require("path");
+	const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+
+	module.exports = {
+	    entry: "./src/index.js",
+	    plugins: [
+		new HtmlWebpackPlugin({
+		    template: "./src/template.html",
+		}),
+	    ],
+	    output: {
+		filename: "main.js",
+		path: path.resolve(__dirname, "dist"),
+		clean: true,
+	    },
+	};
+
+- webpack.dev.js
+We've set mode to development. Also, we've added the recommended devtool for that environment (strong source mapping), as well as our devServer configuration.
+	const { merge } = require('webpack-merge');
+	const common = require('./webpack.common.js');
+
+	module.exports = merge(common, {
+	    mode: 'development',
+	    devtool: "eval-source-map",
+	    devServer: {
+		watchFiles: ["./src/template.html"],
+	    },
+	});
+
+- webpack.prod.js
+Mode is set to production which loads TerserPlugin, which was first introduced by the tree shaking guide.
+
+	const { merge } = require('webpack-merge');
+	const common = require('./webpack.common.js');
+
+	module.exports = merge(common, {
+	    mode: 'production',
+	});
+
+
+--- UPDATE SCRIPTS ---
+Remember that now you have to use new scripts
