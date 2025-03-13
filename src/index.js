@@ -1,4 +1,7 @@
 import "./styles.css";
+import { newApi } from "./location";
+
+console.log("Hello from " + newApi);
 /*
 //import odinImage from "./odin.png"; IMPORT IMAGES
 
