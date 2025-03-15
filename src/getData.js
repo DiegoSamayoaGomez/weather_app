@@ -1,5 +1,6 @@
 //Take the location from displayData and form an URL with the api KEY as well
 import { apiKey } from "./apiKey";
+import { getRawData } from "./processData.js";
 
 export const getDataFunc = function getDataFunc() {
   const getApiKey = () => {
@@ -20,7 +21,8 @@ export const getDataFunc = function getDataFunc() {
       console.log("Not present errors");
       // Otherwise return the response a JSON
       const convertedResponse = await response.json();
-      return convertedResponse;
+      getRawData(convertedResponse);
+      //return convertedResponse;
     } catch (error) {
       // If there is something wrong, send an error message as the return value
       return `There is an error in GetData: ${error.message}`;
