@@ -2,7 +2,8 @@ import { getDataFunc } from "./getData.js";
 
 // This should be the form wich asks for a location, once triggered it will run the rest of the application
 export const askData = function () {
-  const location = prompt("Gimme a location", "Guatemala");
+  //const location = prompt("Gimme a location", "Guatemala");
+  const location = "Barillas";
   getDataFunc().getLocation(location);
 };
 
@@ -20,7 +21,7 @@ function elementGenerator(
   textElement = "",
   idElement = ""
 ) {
-  const newElement = document.createElement(typeElement);
+  const newElement = document.querySelector(typeElement);
   if (classNameElement) newElement.classList.add(classNameElement);
   if (textElement) newElement.textContent = textElement;
   if (idElement) newElement.id = idElement;
@@ -28,15 +29,29 @@ function elementGenerator(
   return newElement;
 }
 
-export const showDataFunc = async function showDataFunc(filteredData) {
+export const showDataFunc = function showDataFunc(filteredData) {
   console.log("Displaying filtrated data");
   console.log(filteredData);
 
-  const testElement = elementGenerator(
-    "p",
-    "testClass",
-    filteredData.description,
-    "testID"
+  const mainContainer = document.querySelector(".mainContainer");
+
+  // TITLE
+  const titleContainer = elementGenerator(
+    ".titleContainer",
+    "",
+    "CREATE P ELEMENT WICH WILL HAVE THE WEATHER APP TITLE",
+    ""
   );
-  document.body.appendChild(testElement);
+  mainContainer.appendChild(titleContainer);
+
+  // CONTAINER
+  const container = elementGenerator(
+    ".container",
+    "",
+    "CREATE MAIN CONTENT",
+    ""
+  );
+  mainContainer.appendChild(container);
+
+  //
 };
