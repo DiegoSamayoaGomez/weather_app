@@ -1,6 +1,7 @@
 //Take the location from displayData and form an URL with the api KEY as well
 import { apiKey } from "./apiKey";
 import { getRawData } from "./processData.js";
+import { showError } from "./displayData.js";
 
 export const getDataFunc = function getDataFunc() {
   const getApiKey = () => {
@@ -10,6 +11,7 @@ export const getDataFunc = function getDataFunc() {
   const getLocation = async (location) => {
     // Form the URL with location and the key
     let url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=us&key=${getApiKey()}&contentType=json`;
+
     try {
       // Fetch the data and store it
       const response = await fetch(url, { mode: "cors" });
@@ -18,6 +20,7 @@ export const getDataFunc = function getDataFunc() {
       if (!response.ok) {
         throw new Error(`NOT OK ${response.status}`);
       }
+
       console.log("Not present errors");
       // Otherwise return the response a JSON
       const convertedResponse = await response.json();
@@ -25,7 +28,8 @@ export const getDataFunc = function getDataFunc() {
       //return convertedResponse;
     } catch (error) {
       // If there is something wrong, send an error message as the return value
-      return `There is an error in GetData: ${error.message}`;
+      showError(`There is an error in GetData: ${error.message}`);
+      //alert(`There is an error in GetData: ${error.message}`);
       //console.error(`There is an error in GetData: ${error.message}`);
     }
   };
