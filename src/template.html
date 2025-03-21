@@ -14,27 +14,30 @@
     <div class="titleContainer">
       <h1 class="title">Weather APP</h1>
     </div>
+
+    <!-- Search Bar -->
+    <div class="searchBarGroup">
+      <form id="searchBarForm">
+        <ul>
+          <li>
+            <label for="searchBar">Input a place</label>
+            <input type="text" name="search" id="searchBar" required>
+          </li>
+          <li>
+            <button type="submit" id="submitSearch">Search</button>
+          </li>
+        </ul>
+      </form>
+    </div>
+
     <div class="container">
-      <!-- Search Bar -->
-      <div class="searchBarGroup">
-        <form id="searchBarForm">
-          <ul>
-            <li>
-              <label for="searchBar">Input a place</label>
-              <input type="text" name="search" id="searchBar" required>
-            </li>
-            <li>
-              <button type="submit" id="submitSearch">Search</button>
-            </li>
-          </ul>
-        </form>
-      </div>
       <!-- Address -->
       <div class="addressGroup">
         <h3 class="addressComplete">HUEHUETENANGO, GUATEMALA</h3>
       </div>
       <!-- Weather info LEFT RIGHT -->
       <div class="weatherInfoGroup">
+        <!-- Left -->
         <div class="weatherInfoGroupLeft">
           <div class="toggleTemperatureType">
             <input type="radio" id="html" name="fav_language" value="HTML">
@@ -53,8 +56,38 @@
             </div>
           </div>
         </div>
-        <div class="weatherInfoGroupRight"> </div>
+        <!-- Right -->
+        <div class="weatherInfoGroupRight">
 
+          <div class="todayDateGroup">
+            <p class="todayDate">2025 - 03 - 21</p>
+          </div>
+          <div class="addressGroup">
+            <p class="address">Guatemala</p>
+          </div>
+          <div class="timeZoneGroup">
+            <p class="timeZone">America GT</p>
+          </div>
+        </div>
+      </div>
+      <!-- Additional info -->
+      <div class="additionalInfoGroup">
+        <!-- Left -->
+        <div class="additionalInfoGroupLeft">
+          <div class="sunriseInfoGroup">
+            <p class="sunrise">Sunrise</p>
+            <p>SUN ICON (ADD CLASS)</p>
+            <p class="sunriseHour">6:00 AM</p>
+          </div>
+        </div>
+        <!-- Right -->
+        <div class="additionalInfoGroupRight">
+          <div class="sunsetInfoGroup">
+            <p class="sunset">Sunset</p>
+            <p>MOON ICON (ADD CLASS)</p>
+            <p class="sunsetHour">6:00 PM</p>
+          </div>
+        </div>
       </div>
     </div>
 
