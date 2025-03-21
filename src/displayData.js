@@ -39,6 +39,17 @@ export const askData = function () {
   });
 };
 
+// When an error occurrs, show it in the screen
+export const showError = function (messageError) {
+  // Select container
+  const container = document.querySelector(".container");
+  // Clear container
+  container.textContent = "";
+  // Show the error message received
+  const errorMessage = elementGenerator("p", "errorMessage", messageError, "");
+  container.appendChild(errorMessage);
+};
+
 // Once the function is called, show the current weather
 export const showDataFunc = function showDataFunc(filteredData) {
   console.log("Displaying filtrated data");
