@@ -12,8 +12,50 @@
 
 
     <div class="titleContainer">
+      <h1 class="title">Weather APP</h1>
     </div>
     <div class="container">
+      <!-- Search Bar -->
+      <div class="searchBarGroup">
+        <form id="searchBarForm">
+          <ul>
+            <li>
+              <label for="searchBar">Input a place</label>
+              <input type="text" name="search" id="searchBar" required>
+            </li>
+            <li>
+              <button type="submit" id="submitSearch">Search</button>
+            </li>
+          </ul>
+        </form>
+      </div>
+      <!-- Address -->
+      <div class="addressGroup">
+        <h3 class="addressComplete">HUEHUETENANGO, GUATEMALA</h3>
+      </div>
+      <!-- Weather info LEFT RIGHT -->
+      <div class="weatherInfoGroup">
+        <div class="weatherInfoGroupLeft">
+          <div class="toggleTemperatureType">
+            <input type="radio" id="html" name="fav_language" value="HTML">
+            <label for="html">HTML</label><br>
+            <input type="radio" id="css" name="fav_language" value="CSS">
+            <label for="css">CSS</label><br>
+          </div>
+          <h1 class="mainTemperature">20 C"</h1>
+          <p class="descriptionTemperature">Description</p>
+          <div class="weatherInfoGroupLeftTemps">
+            <div class="maxTempGroup">
+              <p class="maxTemp">max temp</p>
+            </div>
+            <div class="minTempGroup">
+              <p class="minTemp">min Temp</p>
+            </div>
+          </div>
+        </div>
+        <div class="weatherInfoGroupRight"> </div>
+
+      </div>
     </div>
 
 
