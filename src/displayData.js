@@ -21,7 +21,7 @@ function elementGenerator(
   textElement = "",
   idElement = ""
 ) {
-  const newElement = document.querySelector(typeElement);
+  const newElement = document.createElement(typeElement);
   if (classNameElement) newElement.classList.add(classNameElement);
   if (textElement) newElement.textContent = textElement;
   if (idElement) newElement.id = idElement;
@@ -34,6 +34,13 @@ export const showDataFunc = function showDataFunc(filteredData) {
   console.log(filteredData);
 
   const mainContainer = document.querySelector(".mainContainer");
+
+  const titleContainer = document.querySelector(".titleContainer");
+  mainContainer.appendChild(titleContainer);
+  const parTest = elementGenerator("p", "parTest", "TITLE", "");
+  titleContainer.appendChild(parTest);
+
+  /* 
 
   // TITLE
   const titleContainer = elementGenerator(
@@ -53,5 +60,8 @@ export const showDataFunc = function showDataFunc(filteredData) {
   );
   mainContainer.appendChild(container);
 
+  // search bar
+const searchBarGroup = elementGenerator("searchBarGroup", )
   //
+  */
 };
