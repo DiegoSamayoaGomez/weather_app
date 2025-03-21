@@ -16,7 +16,7 @@ export function filterRawData(rawData) {
   // Create and object with the filtered data
   const filteredData = {
     completeAddres: rawData.resolvedAddress,
-    temperatureCelsius: rawData.currentConditions.temp,
+    temperatureFahrenheit: rawData.currentConditions.temp,
     description: rawData.description,
     maxTemp: rawData.days[0].tempmax,
     minTemp: rawData.days[0].tempmin,
