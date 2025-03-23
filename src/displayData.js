@@ -1,4 +1,18 @@
 import { getDataFunc } from "./getData.js";
+import sunImg from "./img/sunset.png";
+import moonImg from "./img/night.png";
+/*
+
+import odinImage from "./odin.png"; IMPORT IMAGES
+
+    import odinImage from "./odin.png";
+       
+    const image = document.createElement("img");
+    image.src = odinImage;
+       
+    document.body.appendChild(image);
+
+*/
 
 // Create a function which creates elements
 
@@ -86,6 +100,19 @@ export const showDataFunc = function showDataFunc(filteredData) {
   // Insert temperature in Fahrenheit
   const mainTemperature = document.querySelector(".mainTemperature");
   mainTemperature.textContent = `${filteredData.temperatureFahrenheit}°F`; // THe button should change the temperatures
+  if (mainTemperatureCelsius < 0) {
+    mainTemperature.classList = "mainTemperature freezing";
+  } else if (mainTemperatureCelsius >= 0 && mainTemperatureCelsius < 10) {
+    mainTemperature.classList = "mainTemperature cold";
+  } else if (mainTemperatureCelsius >= 10 && mainTemperatureCelsius < 15) {
+    mainTemperature.classList = "mainTemperature cool";
+  } else if (mainTemperatureCelsius >= 15 && mainTemperatureCelsius < 30) {
+    mainTemperature.classList = "mainTemperature warm";
+  } else if (mainTemperatureCelsius >= 30) {
+    mainTemperature.classList = "mainTemperature hot";
+  } else {
+    mainTemperature.classList.add("default");
+  }
 
   // Description
   const descriptionTemperature = document.querySelector(
@@ -119,6 +146,7 @@ export const showDataFunc = function showDataFunc(filteredData) {
   const sunrise = elementGenerator("p", "sunrise", "Sunrise", "");
 
   const sunriseIcon = elementGenerator("img", "sunriseIcon", "", "");
+  sunriseIcon.src = sunImg;
 
   const sunriseHour = document.querySelector(".sunriseHour");
   sunriseHour.textContent = filteredData.sunrise;
@@ -131,6 +159,7 @@ export const showDataFunc = function showDataFunc(filteredData) {
   const sunset = elementGenerator("p", "sunset", " Sunset", "");
 
   const sunsetIcon = elementGenerator("img", "sunsetIcon", "", "");
+  sunsetIcon.src = moonImg;
 
   const sunsetHour = document.querySelector(".sunsetHour");
   sunsetHour.textContent = filteredData.sunset;
