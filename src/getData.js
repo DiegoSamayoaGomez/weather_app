@@ -28,9 +28,8 @@ export const getDataFunc = function getDataFunc() {
       //return convertedResponse;
     } catch (error) {
       // If there is something wrong, send an error message as the return value
-      showError(`There is an error in GetData: ${error.message}`);
-      //alert(`There is an error in GetData: ${error.message}`);
-      //console.error(`There is an error in GetData: ${error.message}`);
+      console.log(`There is an error in GetData: ${error.message}`);
+      showError("Something went wrong, try again...");
     }
   };
   return { getLocation };
