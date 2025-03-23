@@ -114,12 +114,28 @@ export const showDataFunc = function showDataFunc(filteredData) {
   timeZone.textContent = filteredData.timeType;
 
   // Sunrise
+  const sunriseInfoGroup = document.querySelector(".sunriseInfoGroup");
+
+  const sunrise = elementGenerator("p", "sunrise", "Sunrise", "");
+
+  const sunriseIcon = elementGenerator("img", "sunriseIcon", "", "");
+
   const sunriseHour = document.querySelector(".sunriseHour");
   sunriseHour.textContent = filteredData.sunrise;
+  sunriseInfoGroup.appendChild(sunrise);
+  sunriseInfoGroup.appendChild(sunriseIcon);
 
   // Sunset
+  const sunsetInfoGroup = document.querySelector(".sunsetInfoGroup");
+
+  const sunset = elementGenerator("p", "sunset", " Sunset", "");
+
+  const sunsetIcon = elementGenerator("img", "sunsetIcon", "", "");
+
   const sunsetHour = document.querySelector(".sunsetHour");
   sunsetHour.textContent = filteredData.sunset;
+  sunsetInfoGroup.appendChild(sunset);
+  sunsetInfoGroup.appendChild(sunsetIcon);
 
   toggleTemperatureType.appendChild(toggleTemperatureButton);
 
