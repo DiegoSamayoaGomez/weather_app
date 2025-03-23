@@ -1,18 +1,6 @@
 import { getDataFunc } from "./getData.js";
 import sunImg from "./img/sunset.png";
 import moonImg from "./img/night.png";
-/*
-
-import odinImage from "./odin.png"; IMPORT IMAGES
-
-    import odinImage from "./odin.png";
-       
-    const image = document.createElement("img");
-    image.src = odinImage;
-       
-    document.body.appendChild(image);
-
-*/
 
 // Create a function which creates elements
 
@@ -93,25 +81,32 @@ export const showDataFunc = function showDataFunc(filteredData) {
     ""
   );
 
+  // Append button to toggle temperature formats
+  toggleTemperatureType.appendChild(toggleTemperatureButton);
+
   // Insert address
   const addressComplete = document.querySelector(".addressComplete");
   addressComplete.textContent = filteredData.completeAddres;
 
   // Insert temperature in Fahrenheit
   const mainTemperature = document.querySelector(".mainTemperature");
-  mainTemperature.textContent = `${filteredData.temperatureFahrenheit}°F`; // THe button should change the temperatures
+  mainTemperature.textContent = `${filteredData.temperatureFahrenheit}°F`;
+
+  // Select left container and, based on the temperature in celsius
+  // add a class name to later add an specific design to it
+  const weatherInfoGroupLeft = document.querySelector(".weatherInfoGroupLeft");
   if (mainTemperatureCelsius < 0) {
-    mainTemperature.classList = "mainTemperature freezing";
+    weatherInfoGroupLeft.classList = "weatherInfoGroupLeft freezing";
   } else if (mainTemperatureCelsius >= 0 && mainTemperatureCelsius < 10) {
-    mainTemperature.classList = "mainTemperature cold";
+    weatherInfoGroupLeft.classList = "weatherInfoGroupLeft cold";
   } else if (mainTemperatureCelsius >= 10 && mainTemperatureCelsius < 15) {
-    mainTemperature.classList = "mainTemperature cool";
+    weatherInfoGroupLeft.classList = "weatherInfoGroupLeft cool";
   } else if (mainTemperatureCelsius >= 15 && mainTemperatureCelsius < 30) {
-    mainTemperature.classList = "mainTemperature warm";
+    weatherInfoGroupLeft.classList = "weatherInfoGroupLeft warm";
   } else if (mainTemperatureCelsius >= 30) {
-    mainTemperature.classList = "mainTemperature hot";
+    weatherInfoGroupLeft.classList = "weatherInfoGroupLeft hot";
   } else {
-    mainTemperature.classList.add("default");
+    weatherInfoGroupLeft.classList.add("weatherInfoGroupLeft");
   }
 
   // Description
@@ -142,32 +137,57 @@ export const showDataFunc = function showDataFunc(filteredData) {
 
   // Sunrise
   const sunriseInfoGroup = document.querySelector(".sunriseInfoGroup");
+  // Clear any existing content to prevent duplication
+  sunriseInfoGroup.textContent = "";
 
+  // Create a title, icon and hour of the sunrise
   const sunrise = elementGenerator("p", "sunrise", "Sunrise", "");
 
   const sunriseIcon = elementGenerator("img", "sunriseIcon", "", "");
-  sunriseIcon.src = sunImg;
+  sunriseIcon.src = sunImg; // Use imported image
 
-  const sunriseHour = document.querySelector(".sunriseHour");
-  sunriseHour.textContent = filteredData.sunrise;
+  const sunriseHour = elementGenerator(
+    "p",
+    "sunriseHour",
+    filteredData.sunrise, // Insert the sunrise hour as text content
+    ""
+  );
+
+  // Append title, icon and hour of the sunrise
   sunriseInfoGroup.appendChild(sunrise);
   sunriseInfoGroup.appendChild(sunriseIcon);
+  sunriseInfoGroup.appendChild(sunriseHour);
 
   // Sunset
   const sunsetInfoGroup = document.querySelector(".sunsetInfoGroup");
+  // Clear container to prevent any duplication
+  sunsetInfoGroup.textContent = "";
 
+  // Create a title, icon and hour of the sunset
   const sunset = elementGenerator("p", "sunset", " Sunset", "");
 
   const sunsetIcon = elementGenerator("img", "sunsetIcon", "", "");
-  sunsetIcon.src = moonImg;
+  sunsetIcon.src = moonImg; // Use imported image
 
-  const sunsetHour = document.querySelector(".sunsetHour");
-  sunsetHour.textContent = filteredData.sunset;
+  const sunsetHour = elementGenerator(
+    "p",
+    "sunsetHour",
+    filteredData.sunset, // Insert the sunset hour as text content
+    ""
+  );
+
+  // Append title, icon and hour of the sunset
   sunsetInfoGroup.appendChild(sunset);
   sunsetInfoGroup.appendChild(sunsetIcon);
+  sunsetInfoGroup.appendChild(sunsetHour);
 
-  toggleTemperatureType.appendChild(toggleTemperatureButton);
-
+  /*
+  First the temperature is shown in Fahrenheit by default
+  It will show the button to change to celsius
+  If the button is pressed, the class name changes to fahreneit
+  and changes the main temperature, min and max as well
+  When the button is pressed again, it does the same but with fahrenheit
+  */
   toggleTemperatureButton.addEventListener("click", (e) => {
     if (e.target.classList == "celsiusBtn") {
       toggleTemperatureButton.textContent = "Fahrenheit";
@@ -178,7 +198,7 @@ export const showDataFunc = function showDataFunc(filteredData) {
     } else {
       toggleTemperatureButton.textContent = "Celsius";
       toggleTemperatureButton.classList = "celsiusBtn";
-      mainTemperature.textContent = `${filteredData.temperatureFahrenheit}°F`; // The button should change the temperatures
+      mainTemperature.textContent = `${filteredData.temperatureFahrenheit}°F`;
       maxTemp.textContent = `${filteredData.maxTemp}°F`;
       minTemp.textContent = `${filteredData.minTemp}°F`;
     }
