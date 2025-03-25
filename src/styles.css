@@ -1,0 +1,127 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  background-color: #f1eded;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+  margin: 0;
+}
+
+.mainContainer {
+  display: grid;
+  /*Title SearchBar Container
+  Footer is outside the grid
+  */
+  grid-template-rows: 150px 150px 1fr;
+}
+
+.titleContainer {
+  background-color: #202020;
+  color: white;
+
+  font-size: 35px;
+
+  /* Align text vertical and horizontal*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchBarGroup {
+  padding: 20px;
+
+  /* Align text vertical and horizontal*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Put input and button next to each one*/
+ul {
+  display: flex;
+  gap: 20px;
+}
+
+/* Adjust size*/
+input {
+  height: 40px;
+  width: 400px;
+  border: 0;
+  /* Add rounded corners and use padding to move the "Location text" */
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+/* Adjust size*/
+button {
+  height: 40px;
+  border: 0;
+}
+
+/* Change to hand cursor when hovering a button*/
+button:hover {
+  cursor: pointer;
+}
+
+#submitSearch {
+  background-color: #202020;
+  color: white;
+
+  /* Add rounded corners and use padding to move the "Location text" */
+  border-radius: 10px;
+
+  /* Align text vertical and horizontal*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Remove bullets */
+li {
+  list-style-type: none;
+}
+
+.container {
+  padding: 20px;
+
+  /* Align text vertical and horizontal*/
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.container > div {
+  border: 1px solid black;
+}
+
+.errorContainer,
+.addressGroup,
+.weatherInfoGroup,
+.additionalInfoGroup {
+  grid-column: 1/-1;
+}
+/* Attach it to the end of the screen no matter size */
+.footer {
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+  background-color: #272727;
+  font-weight: bold;
+}
+
+.footer > a:visited,
+a:link {
+  color: white;
+}
