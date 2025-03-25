@@ -1,9 +1,12 @@
 import { getDataFunc } from "./getData.js";
 import sunImg from "./img/sunset.png";
 import moonImg from "./img/night.png";
+import clouds from "./img/clouds.png";
+import search from "./img/search.png";
+import "./styles.css";
+import "./modern-normalize.css";
 
 // Create a function which creates elements
-
 function elementGenerator(
   typeElement,
   classNameElement = "",
@@ -17,6 +20,18 @@ function elementGenerator(
 
   return newElement;
 }
+
+/* Add cloud icon next to the title*/
+const titleContainer = document.querySelector(".titleContainer");
+const imgTitle = elementGenerator("img", "", "", "");
+imgTitle.src = clouds;
+titleContainer.appendChild(imgTitle);
+
+// Add search icon to the search button
+const submitSearch = document.getElementById("submitSearch");
+const searchIcon = elementGenerator("img", "", "", "");
+searchIcon.src = search;
+submitSearch.prepend(searchIcon); // Use prepend to show the icon before the "Search text"
 
 // This should be the form wich asks for a location, once triggered it will run the rest of the application
 export const askData = function () {
