@@ -18,10 +18,11 @@ li {
 
 .mainContainer {
   display: grid;
-  /*Title SearchBar Container
+  /*SearchBar ErrorMessage Container
   Footer is outside the grid
   */
-  grid-template-rows: 150px 150px 1fr;
+  grid-template-rows: 100px 1fr;
+  justify-content: center;
 }
 
 .titleContainer {
@@ -91,19 +92,41 @@ li {
 }
 
 .container {
-  padding: 20px;
+  max-width: 1000px;
+
+  gap: 20px;
 
   /* Align text vertical and horizontal*/
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
+  /* ErrorMessage Address Temperature AdditionalInfo*/
+  grid-template-rows: 40px 40px 1fr 1fr;
 
   justify-content: center;
-  align-items: center;
+  align-items: start;
 }
 
-.container > div {
-  border: 1px solid black;
+.errorContainer {
+  /* Use the whole space provided by the grid parent container*/
+  height: 100%;
+  /* Align text vertical and horizontal*/
+  display: inline-block;
+}
+
+.errorMessage {
+  /* Use the whole space provided by the grid parent container*/
+  height: 100%;
+
+  background-color: #c52626;
+  color: white;
+  font-weight: bold;
+
+  /* Align text vertical and horizontal*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Add rounded corners */
+  border-radius: 10px;
 }
 
 .errorContainer,
@@ -112,6 +135,66 @@ li {
 .additionalInfoGroup {
   grid-column: 1/-1;
 }
+
+.addressGroup {
+  background-color: white;
+  color: black;
+
+  /* Center just text*/
+  text-align: center;
+
+  /* Add rounded corners */
+  border-radius: 5px;
+}
+
+.weatherInfoGroup {
+  /* Create 2 columns*/
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+
+  gap: 20px;
+}
+
+.weatherInfoGroupLeft,
+.weatherInfoGroupRight {
+  padding: 10px;
+}
+
+/* Change background an text color based on the temperature */
+.cool {
+  background-color: #c52626;
+  color: white;
+}
+
+.weatherInfoGroupLeft {
+  border: 1px solid black;
+  gap: 10px;
+
+  display: flex;
+  /* Add rounded corners */
+  border-radius: 5px;
+}
+
+.mainTemperature {
+  /* Center temperature*/
+  display: flex;
+  align-items: center;
+  font-size: 35px;
+}
+
+/* Use flex to allow the usage of gap*/
+.tempInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.toggleTemperatureType {
+  /* Move button to the end of the container*/
+  align-self: flex-end;
+}
+
 /* Attach it to the end of the screen no matter size */
 .footer {
   width: 100%;
