@@ -66,6 +66,9 @@ input {
 button {
   height: 40px;
   border: 0;
+
+  /* Add rounded corners and use padding to move the "Location text" */
+  border-radius: 10px;
 }
 
 /* Change to hand cursor when hovering a button*/
@@ -76,9 +79,6 @@ button:hover {
 #submitSearch {
   background-color: #202020;
   color: white;
-
-  /* Add rounded corners and use padding to move the "Location text" */
-  border-radius: 10px;
 
   /* Align text vertical and horizontal*/
   display: flex;
@@ -162,13 +162,31 @@ li {
 }
 
 /* Change background an text color based on the temperature */
+.freezing {
+  background-color: #02031d;
+  color: white;
+}
+.cold {
+  background-color: #1512d9;
+  color: white;
+}
+
 .cool {
-  background-color: #c52626;
+  background-color: #5b83f9;
+  color: white;
+}
+
+.warm {
+  background-color: #ff9081;
+  color: #480f07;
+}
+
+.hot {
+  background-color: #be1600;
   color: white;
 }
 
 .weatherInfoGroupLeft {
-  border: 1px solid black;
   gap: 10px;
 
   display: flex;
@@ -188,11 +206,30 @@ li {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  font-weight: bold;
+}
+
+.celsiusBtn,
+.fahrenheitBtn {
+  background-color: white;
+  color: #000000;
+
+  /* Align text vertical and horizontal*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .toggleTemperatureType {
   /* Move button to the end of the container*/
   align-self: flex-end;
+}
+
+.weatherInfoGroupLeftTemps {
+  /* Align text vertical and horizontal*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Attach it to the end of the screen no matter size */
