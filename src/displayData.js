@@ -3,6 +3,7 @@ import sunImg from "./img/sunset.png";
 import moonImg from "./img/night.png";
 import clouds from "./img/clouds.png";
 import search from "./img/search.png";
+import toggle from "./img/switch.png";
 import "./styles.css";
 import "./modern-normalize.css";
 
@@ -96,6 +97,11 @@ export const showDataFunc = function showDataFunc(filteredData) {
     ""
   );
 
+  const switchIcon = elementGenerator("img", "", "", "");
+  switchIcon.src = toggle;
+
+  toggleTemperatureButton.prepend(switchIcon);
+
   // Append button to toggle temperature formats
   toggleTemperatureType.appendChild(toggleTemperatureButton);
 
@@ -132,11 +138,11 @@ export const showDataFunc = function showDataFunc(filteredData) {
 
   // Max Temp
   const maxTemp = document.querySelector(".maxTemp");
-  maxTemp.textContent = `${filteredData.maxTemp}°F`;
+  maxTemp.textContent = `MAX: ${filteredData.maxTemp}°F`;
 
   // Min Temp
   const minTemp = document.querySelector(".minTemp");
-  minTemp.textContent = `${filteredData.minTemp}°F`;
+  minTemp.textContent = `MIN: ${filteredData.minTemp}°F`;
 
   // Date of today
   const todayDate = document.querySelector(".todayDate");
@@ -208,14 +214,16 @@ export const showDataFunc = function showDataFunc(filteredData) {
       toggleTemperatureButton.textContent = "Fahrenheit";
       toggleTemperatureButton.classList = "fahrenheitBtn";
       mainTemperature.textContent = `${mainTemperatureCelsius}°C`;
-      maxTemp.textContent = `${maxTempCelsius}°C`;
-      minTemp.textContent = `${minTempCelsius}°C`;
+      maxTemp.textContent = `MAX: ${maxTempCelsius}°C`;
+      minTemp.textContent = `MIN: ${minTempCelsius}°C`;
+      toggleTemperatureButton.prepend(switchIcon);
     } else {
       toggleTemperatureButton.textContent = "Celsius";
       toggleTemperatureButton.classList = "celsiusBtn";
       mainTemperature.textContent = `${filteredData.temperatureFahrenheit}°F`;
-      maxTemp.textContent = `${filteredData.maxTemp}°F`;
-      minTemp.textContent = `${filteredData.minTemp}°F`;
+      maxTemp.textContent = `MAX: ${filteredData.maxTemp}°F`;
+      minTemp.textContent = `MIN: ${filteredData.minTemp}°F`;
+      toggleTemperatureButton.prepend(switchIcon);
     }
   });
 
