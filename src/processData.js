@@ -20,11 +20,15 @@ export function filterRawData(rawData) {
     description: rawData.description,
     maxTemp: rawData.days[0].tempmax,
     minTemp: rawData.days[0].tempmin,
-    todayDate: rawData.days[0].datetime,
+    todayDate: rawData.currentConditions.datetimeEpoch,
     address: rawData.address,
     timeType: rawData.timezone,
     sunrise: rawData.currentConditions.sunrise,
-    sunset: rawData.currentConditions.sunset
+    sunset: rawData.currentConditions.sunset,
+    days: rawData.days.slice(0, 5)
+    /*
+    let array = [5,10,15,20,25,30,35]
+let newArray = array.slice(0,5)*/
   };
   // Send filtered data to the display to interpret it
   showDataFunc(filteredData);
