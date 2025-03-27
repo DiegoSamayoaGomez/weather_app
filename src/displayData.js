@@ -4,6 +4,9 @@ import moonImg from "./img/night.png";
 import clouds from "./img/clouds.png";
 import search from "./img/search.png";
 import toggle from "./img/switch.png";
+import calendar from "./img/calendar.png";
+import map from "./img/country.png";
+import time from "./img/timezone.png";
 import "./styles.css";
 import "./modern-normalize.css";
 
@@ -130,6 +133,13 @@ export const showDataFunc = function showDataFunc(filteredData) {
     weatherInfoGroupLeft.classList.add("weatherInfoGroupLeft");
   }
 
+  // Select the right container and add a second class which will be used to set
+  // the background color
+  const weatherInfoGroupRight = document.querySelector(
+    ".weatherInfoGroupRight"
+  );
+  weatherInfoGroupRight.classList = "weatherInfoGroupRight weatherRightBack";
+
   // Description
   const descriptionTemperature = document.querySelector(
     ".descriptionTemperature"
@@ -144,27 +154,63 @@ export const showDataFunc = function showDataFunc(filteredData) {
   const minTemp = document.querySelector(".minTemp");
   minTemp.textContent = `MIN: ${filteredData.minTemp}°F`;
 
+  // Add icons and text to the right container
+  const todayDateGroup = document.querySelector(".todayDateGroup");
+  // Prevent duplication
+  todayDateGroup.textContent = "";
+
   // Date of today
-  const todayDate = document.querySelector(".todayDate");
-  todayDate.textContent = filteredData.todayDate;
+  // Add calendar icon
+  const calendarIcon = elementGenerator("img", "", "", "");
+  calendarIcon.src = calendar;
+  // Add it to the start of the container
+  todayDateGroup.prepend(calendarIcon);
+
+  const todayDate = elementGenerator(
+    "p",
+    "todayDate",
+    filteredData.todayDate,
+    ""
+  );
+
+  todayDateGroup.appendChild(todayDate);
+
+  // Add icon and address
+  const addressGroupTwo = document.querySelector(".addressGroupTwo");
+  // Prevent duplication
+  addressGroupTwo.textContent = "";
+
+  const mapIcon = elementGenerator("img", "", "", "");
+  mapIcon.src = map;
+
+  addressGroupTwo.prepend(mapIcon);
 
   // Short address
-  const address = document.querySelector(".address");
-  address.textContent = filteredData.address;
+  const address = elementGenerator("p", "address", filteredData.address, "");
+  addressGroupTwo.appendChild(address);
 
+  // ADd icon and timezone icon
+  const timeZoneGroup = document.querySelector(".timeZoneGroup");
+  //Prevent duplication
+  timeZoneGroup.textContent = "";
+
+  const timezoneIcon = elementGenerator("img", "", "", "");
+  timezoneIcon.src = time;
+
+  timeZoneGroup.prepend(timezoneIcon);
   // Timezone
-  const timeZone = document.querySelector(".timeZone");
-  timeZone.textContent = filteredData.timeType;
+
+  const timeZone = elementGenerator("p", "timeZone", filteredData.timeType, "");
+  timeZoneGroup.appendChild(timeZone);
 
   // Sunrise
-  const sunriseInfoGroup = document.querySelector(".sunriseInfoGroup");
-  // Clear any existing content to prevent duplication
-  sunriseInfoGroup.textContent = "";
+  const sunriseInfoGroup = elementGenerator("div", "sunriseInfoGroup", "", "");
 
   // Create a title, icon and hour of the sunrise
   const sunrise = elementGenerator("p", "sunrise", "Sunrise", "");
 
   const sunriseIcon = elementGenerator("img", "sunriseIcon", "", "");
+
   sunriseIcon.src = sunImg; // Use imported image
 
   const sunriseHour = elementGenerator(
@@ -176,13 +222,21 @@ export const showDataFunc = function showDataFunc(filteredData) {
 
   // Append title, icon and hour of the sunrise
   sunriseInfoGroup.appendChild(sunrise);
-  sunriseInfoGroup.appendChild(sunriseIcon);
   sunriseInfoGroup.appendChild(sunriseHour);
+  // Add icon in the outside
+  const additionalInfoGroupLeft = document.querySelector(
+    ".additionalInfoGroupLeft"
+  );
+
+  // Create new className to hold the colors
+  additionalInfoGroupLeft.classList = "additionalInfoGroupLeft sunriseColors";
+  additionalInfoGroupLeft.textContent = "";
+  additionalInfoGroupLeft.appendChild(sunriseInfoGroup);
+  additionalInfoGroupLeft.appendChild(sunriseIcon);
 
   // Sunset
-  const sunsetInfoGroup = document.querySelector(".sunsetInfoGroup");
-  // Clear container to prevent any duplication
-  sunsetInfoGroup.textContent = "";
+  //const sunsetInfoGroup = document.querySelector(".sunsetInfoGroup");
+  const sunsetInfoGroup = elementGenerator("div", "sunsetInfoGroup", "", "");
 
   // Create a title, icon and hour of the sunset
   const sunset = elementGenerator("p", "sunset", " Sunset", "");
@@ -199,9 +253,16 @@ export const showDataFunc = function showDataFunc(filteredData) {
 
   // Append title, icon and hour of the sunset
   sunsetInfoGroup.appendChild(sunset);
-  sunsetInfoGroup.appendChild(sunsetIcon);
   sunsetInfoGroup.appendChild(sunsetHour);
+  const additionalInfoGroupRight = document.querySelector(
+    ".additionalInfoGroupRight"
+  );
 
+  // Create new className to hold the colors
+  additionalInfoGroupRight.classList = "additionalInfoGroupRight sunsetColors";
+  additionalInfoGroupRight.textContent = "";
+  additionalInfoGroupRight.appendChild(sunsetInfoGroup);
+  additionalInfoGroupRight.appendChild(sunsetIcon);
   /*
   First the temperature is shown in Fahrenheit by default
   It will show the button to change to celsius
