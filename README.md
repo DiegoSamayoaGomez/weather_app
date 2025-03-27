@@ -1,25 +1,21 @@
-# webpack-linters_template
+# WEATHER APP
 
-Template repository which includes configurations files for Webpack, esLint and Prettier
+This project involves building a weather forecast website using the Visual Crossing API. The app allows users to search for weather information based on a specific location and toggle between Fahrenheit or Celsius temperature units. 
 
-# reference links
+## API Keys
+Since this project uses a public API key, I imported it. 
+Never expose your API key in the frontend code. 
 
-https://www.theodinproject.com/lessons/node-path-javascript-revisiting-webpack#template-repositories
-https://webpack.js.org/guides/production/
-https://www.theodinproject.com/lessons/node-path-javascript-linting
-https://www.theodinproject.com/lessons/node-path-javascript-restaurant-page
+## The application shows:
 
-# scripts
+- Weather information for a specific location
 
-- npm run build => npx webpack
-- npm run dev => npx webpack serve
-- npm run deploy => git subtree push --prefix dist origin gh-pages
+- Toggle options between Fahrenheit and Celsius for temperature display
 
-## remember to run
+- Dynamic background color or images reflecting the current weather (e.g., cold, hot)
 
-npm init @eslint/config
+- Show weather information by date, location and time zone
 
-I didn´t set a configuration in the template so it can be changed in the future
-
-After running the command mentioned above run
-npm install --save-dev eslint-config-prettier
+# How to use
+ - Go to [WEATHER APP](https://diegosamayoagomez.github.io/weather_app/)
+ - Put a location and press the search button
