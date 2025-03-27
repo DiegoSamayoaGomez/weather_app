@@ -71,6 +71,13 @@ function convertToCelsius(temperatureFahrenheit) {
   // C = (F - 32) × 5/9
   return ((temperatureFahrenheit - 32) * (5 / 9)).toFixed(2);
 }
+
+// Return a readable date
+function convertEpochToDate(datetimeEpoch) {
+  const nextDays = new Date(datetimeEpoch * 1000);
+  return nextDays.toLocaleDateString();
+}
+
 // Once the function is called, show the current weather
 export const showDataFunc = function showDataFunc(filteredData) {
   // First, convert all temperatures into Celsius (it´s easier for me)
@@ -169,7 +176,7 @@ export const showDataFunc = function showDataFunc(filteredData) {
   const todayDate = elementGenerator(
     "p",
     "todayDate",
-    filteredData.todayDate,
+    convertEpochToDate(filteredData.todayDate),
     ""
   );
 
@@ -288,6 +295,57 @@ export const showDataFunc = function showDataFunc(filteredData) {
     }
   });
 
-  console.log("Displaying filtrated data");
+  console.log("Displaying filtered data");
   console.log(filteredData);
+
+  // Send the next 5 days information
+  nextDaysWeather(filteredData.days);
 };
+
+// Show the weather conditions for the next 5 days
+function nextDaysWeather(arrayOfDays) {
+  const container = document.querySelector(".container");
+
+  // Clear the previous nextDaysContainer if it exists
+  let nextDaysContainer = container.querySelector(".nextDaysContainer");
+  if (nextDaysContainer) {
+    nextDaysContainer.remove(); // Remove the previous container
+  }
+
+  nextDaysContainer = elementGenerator("div", "nextDaysContainer", "", "");
+  // Prevent duplication
+  nextDaysContainer.textContent = "";
+  container.appendChild(nextDaysContainer);
+
+  // Extract the 5 days array and insert them into elements
+  arrayOfDays.forEach((element) => {
+    // Create individual container
+    const dayContainer = elementGenerator("div", "dayContainer", "", "");
+
+    nextDaysContainer.appendChild(dayContainer);
+    console.log(element.datetime, element.temp, element.conditions);
+    // Create and insert 5 days with date, temp and conditions
+    const datetimeDays = elementGenerator(
+      "p",
+      "datetimeDays",
+      convertEpochToDate(element.datetimeEpoch),
+      ""
+    );
+    const tempDays = elementGenerator(
+      "p",
+      "tempDays",
+      `${element.temp}°F / ${convertToCelsius(element.temp)}°C`,
+      ""
+    );
+    const contitionDays = elementGenerator(
+      "p",
+      "contitionDays",
+      element.conditions,
+      ""
+    );
+
+    dayContainer.appendChild(datetimeDays);
+    dayContainer.appendChild(tempDays);
+    dayContainer.appendChild(contitionDays);
+  });
+}
