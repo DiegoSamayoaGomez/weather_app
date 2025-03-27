@@ -100,7 +100,7 @@ li {
   display: grid;
   grid-template-columns: 1fr;
   /* ErrorMessage Address Temperature AdditionalInfo*/
-  grid-template-rows: 40px 40px 1fr 1fr;
+  grid-template-rows: 40px 40px 0.05fr 0.5fr;
 
   justify-content: center;
   align-items: start;
@@ -147,7 +147,8 @@ li {
   border-radius: 5px;
 }
 
-.weatherInfoGroup {
+.weatherInfoGroup,
+.additionalInfoGroup {
   /* Create 2 columns*/
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -232,6 +233,63 @@ li {
   align-items: center;
 }
 
+.weatherRightBack {
+  background-color: white;
+}
+
+.weatherInfoGroupRight {
+  /* Use flex to allow the usage of gap*/
+  display: flex;
+
+  gap: 15px;
+  justify-content: space-between;
+  align-items: center;
+
+  font-weight: bold;
+
+  color: #262626;
+  /* Add rounded corners */
+  border-radius: 5px;
+}
+
+.todayDateGroup,
+.addressGroupTwo,
+.timeZoneGroup {
+  /* Align text vertical and horizontal*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Create 2 columns*/
+.additionalInfoGroupLeft,
+.additionalInfoGroupRight {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 20px;
+
+  /* Add rounded corners */
+  border-radius: 5px;
+
+  font-size: 20px;
+
+  font-weight: bold;
+}
+
+.sunriseColors {
+  background-color: #fffdc6;
+  color: #462402;
+}
+
+.sunsetColors {
+  background-color: #535380;
+  color: #d8dded;
+}
 /* Attach it to the end of the screen no matter size */
 .footer {
   width: 100%;
